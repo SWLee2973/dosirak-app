@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const setting = () => {
+const settings = () => {
   return (
     <View>
-      <Text>setting</Text>
+      <Text>settings</Text>
     </View>
   );
 };
 
-export default setting;
+export default settings;
 
 const styles = StyleSheet.create({});

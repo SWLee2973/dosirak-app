@@ -1,29 +1,24 @@
-import {
-  DarkTheme,
-  DefaultTheme,
-  ThemeProvider,
-} from "@react-navigation/native";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-import LottieView from "lottie-react-native";
-import { StyleSheet, View } from "react-native";
 import Splash from "@/components/common/Splash";
+import authStore, { IAuthStore } from "@/store/authStore";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    GongGothic: require("../assets/fonts/gong-gothic.ttf"),
+    GongGothicLight: require("../assets/fonts/gong-gothic-light.ttf"),
+    Pretendard: require("../assets/fonts/pretendard.ttf"),
   });
 
-  const [appLoaded, setAppLoaded] = useState(true);
+  const [appLoaded, setAppLoaded] = useState(false);
+  const { isLoggedIn } = authStore<IAuthStore>((state) => state);
 
   useEffect(() => {
     SplashScreen.hideAsync();
@@ -37,12 +32,14 @@ export default function RootLayout() {
 
   return appLoaded || !loaded ? (
     <Splash />
+  ) : isLoggedIn ? (
+    <Stack>
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    </Stack>
   ) : (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
+    <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
+      <Stack.Screen name="register" options={{ headerShown: false }} />
+    </Stack>
   );
 }

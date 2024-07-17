@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/SpaceMono-Regular.ttf",
+      "sha1": "fae3a5a43b50e0408fd61e14383d94a023d332b0"
+    },
+    {
+      "path": "assets/fonts/gong-gothic.ttf",
+      "sha1": "2a35dccb6a0b9d4815ab84e00187a137fba13b94"
+    },
+    {
+      "path": "assets/fonts/pretendard.ttf",
+      "sha1": "f5e25d12ff08ff058acd8a64d5f9b5f9c92b9d17"
+    }
+  ]
+}
