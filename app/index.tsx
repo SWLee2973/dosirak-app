@@ -8,7 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 const index = () => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView className="flex-1 justify-center px-9">
+      <SafeAreaView className="flex-1 justify-center bg-white px-9">
         <Introduction />
         <LoginForm />
         <SNSLogin />

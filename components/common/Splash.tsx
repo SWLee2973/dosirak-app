@@ -7,7 +7,7 @@ const Splash = () => {
     <View style={styles.splashContainer}>
       <LottieView
         style={styles.splash}
-        source={require("../../assets/lottie/splash.json")}
+        source={require("@/assets/lottie/splash.json")}
         autoPlay
         loop={false}
       />

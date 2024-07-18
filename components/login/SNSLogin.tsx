@@ -3,8 +3,6 @@ import { Image, TouchableOpacity, View } from "react-native";
 import FontText from "../common/FontText";
 import LoginFooter from "./LoginFooter";
 
-const MENUITEM = ["아이디 찾기", "비밀번호 찾기", "회원가입"];
-
 const SNSLogin = () => {
   return (
     <View className="items-center gap-y-4">
@@ -13,19 +11,19 @@ const SNSLogin = () => {
         <TouchableOpacity className="rounded-full">
           <Image
             className="h-14 w-14"
-            source={require("../../assets/images/kakao.png")}
+            source={require("@/assets/images/kakao.png")}
           />
         </TouchableOpacity>
         <TouchableOpacity className="rounded-full">
           <Image
             className="h-14 w-14"
-            source={require("../../assets/images/naver.png")}
+            source={require("@/assets/images/naver.png")}
           />
         </TouchableOpacity>
         <TouchableOpacity className="rounded-full">
           <Image
             className="h-14 w-14"
-            source={require("../../assets/images/instagram.png")}
+            source={require("@/assets/images/instagram.png")}
           />
         </TouchableOpacity>
       </View>

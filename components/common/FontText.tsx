@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TextProps } from "react-native";
 
 type TProps = TextProps & {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   font?:
     | "Pretendard"
     | "GongGothic"

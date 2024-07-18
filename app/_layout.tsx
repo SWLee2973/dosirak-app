@@ -25,7 +25,7 @@ export default function RootLayout() {
   const { isLoggedIn } = authStore<IAuthStore>((state) => state);
 
   if (Platform.OS === "android") {
-    StatusBar.setBackgroundColor("#145044");
+    StatusBar.setBackgroundColor("white");
   }
 
   useEffect(() => {
@@ -46,8 +46,8 @@ export default function RootLayout() {
     </Stack>
   ) : (
     <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="register/index" options={{ headerShown: false }} />
+      <Stack.Screen name="index" options={{ headerShown: false }} />
     </Stack>
   );
 }

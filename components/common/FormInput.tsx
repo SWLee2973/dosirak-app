@@ -42,8 +42,9 @@ const FormInput = <T extends {}>({
   const { errors } = useFormState({
     control,
   });
-  const [secureTextEntry, setSecureTextEntry] = useState(false);
-  const [isEnable, setIsEnable] = useState(true);
+  const [secureTextEntry, setSecureTextEntry] = useState(rest.secureTextEntry);
+  const [isEnable, setIsEnable] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSecurity = () => {
     setIsEnable(!isEnable);
@@ -59,13 +60,15 @@ const FormInput = <T extends {}>({
         <View className={containerStyle}>
           <FontText className={labelStyle}>{label}</FontText>
           <TextInput
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
             className={inputStyle}
             placeholder={placeholder}
             onChangeText={onChange}
             value={value}
             secureTextEntry={secureTextEntry}
           />
-          {rest.secureTextEntry && (
+          {rest.secureTextEntry && isFocused && (
             <TouchableOpacity
               onPress={handleSecurity}
               className={eyeButtonStyle}
