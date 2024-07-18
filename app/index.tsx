@@ -1,6 +1,6 @@
-import Introduction from "@/components/Login/Introduction";
-import LoginForm from "@/components/Login/LoginForm";
-import SNSLogin from "@/components/Login/SNSLogin";
+import Introduction from "@/components/login/Introduction";
+import LoginForm from "@/components/login/LoginForm";
+import SNSLogin from "@/components/login/SNSLogin";
 import React from "react";
 import { Keyboard, TouchableWithoutFeedback } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

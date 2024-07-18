@@ -20,5 +20,3 @@ const register = () => {
 };
 
 export default register;
-
-const styles = StyleSheet.create({});
