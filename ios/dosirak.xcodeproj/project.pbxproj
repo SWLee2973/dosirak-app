@@ -11,14 +11,14 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */; };
+		4AFEF9FC602640F99CC6E236 /* gong-gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B942DFEB16884ADA9FCC2B2B /* gong-gothic.ttf */; };
+		6547FE853D124C81ADF68E27 /* gong-gothic-light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BDDEB641939E44019B5B00A9 /* gong-gothic-light.ttf */; };
 		7B7CC544C0754FBDB33C0781 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4180B1873D714240A8E61CC6 /* noop-file.swift */; };
 		96905EF65AED1B983A6B3ABC /* libPods-dosirak.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 58EEBF8E8E6FB1BC6CAF49B5 /* libPods-dosirak.a */; };
 		B18059E884C0ABDD17F3DC3D /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */; };
 		BB2F792D24A3F905000567C9 /* Expo.plist in Resources */ = {isa = PBXBuildFile; fileRef = BB2F792C24A3F905000567C9 /* Expo.plist */; };
-		F68816078CEE96EC4E6245CB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 43F46DFF582DF8622B5F426B /* PrivacyInfo.xcprivacy */; };
-		5E50C23D303E4A9F88AAE013 /* SpaceMono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 471972E340A44482820D71DA /* SpaceMono-Regular.ttf */; };
-		4AFEF9FC602640F99CC6E236 /* gong-gothic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B942DFEB16884ADA9FCC2B2B /* gong-gothic.ttf */; };
 		BF41FDC1D9E94E4A82DB4D9A /* pretendard.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73447934B58C4E12AFB5A97D /* pretendard.ttf */; };
+		F68816078CEE96EC4E6245CB /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 43F46DFF582DF8622B5F426B /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,15 +32,15 @@
 		43F46DFF582DF8622B5F426B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = dosirak/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		58EEBF8E8E6FB1BC6CAF49B5 /* libPods-dosirak.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-dosirak.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C2E3173556A471DD304B334 /* Pods-dosirak.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dosirak.debug.xcconfig"; path = "Target Support Files/Pods-dosirak/Pods-dosirak.debug.xcconfig"; sourceTree = "<group>"; };
+		73447934B58C4E12AFB5A97D /* pretendard.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = pretendard.ttf; path = ../assets/fonts/pretendard.ttf; sourceTree = "<group>"; };
 		7A4D352CD337FB3A3BF06240 /* Pods-dosirak.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dosirak.release.xcconfig"; path = "Target Support Files/Pods-dosirak/Pods-dosirak.release.xcconfig"; sourceTree = "<group>"; };
 		AA286B85B6C04FC6940260E9 /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = dosirak/SplashScreen.storyboard; sourceTree = "<group>"; };
 		B6B00A16BEA542E9B6C2BB23 /* dosirak-Bridging-Header.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "dosirak-Bridging-Header.h"; path = "dosirak/dosirak-Bridging-Header.h"; sourceTree = "<group>"; };
+		B942DFEB16884ADA9FCC2B2B /* gong-gothic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "gong-gothic.ttf"; path = "../assets/fonts/gong-gothic.ttf"; sourceTree = "<group>"; };
 		BB2F792C24A3F905000567C9 /* Expo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Expo.plist; sourceTree = "<group>"; };
+		BDDEB641939E44019B5B00A9 /* gong-gothic-light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "gong-gothic-light.ttf"; path = "../assets/fonts/gong-gothic-light.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		FAC715A2D49A985799AEE119 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-dosirak/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
-		471972E340A44482820D71DA /* SpaceMono-Regular.ttf */ = {isa = PBXFileReference; name = "SpaceMono-Regular.ttf"; path = "../assets/fonts/SpaceMono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B942DFEB16884ADA9FCC2B2B /* gong-gothic.ttf */ = {isa = PBXFileReference; name = "gong-gothic.ttf"; path = "../assets/fonts/gong-gothic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		73447934B58C4E12AFB5A97D /* pretendard.ttf */ = {isa = PBXFileReference; name = "pretendard.ttf"; path = "../assets/fonts/pretendard.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +120,17 @@
 			name = dosirak;
 			sourceTree = "<group>";
 		};
+		BA586B0104204C38AB86FA74 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B942DFEB16884ADA9FCC2B2B /* gong-gothic.ttf */,
+				73447934B58C4E12AFB5A97D /* pretendard.ttf */,
+				BDDEB641939E44019B5B00A9 /* gong-gothic-light.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		BB2F792B24A3F905000567C9 /* Supporting */ = {
 			isa = PBXGroup;
 			children = (
@@ -145,17 +156,6 @@
 			);
 			name = ExpoModulesProviders;
 			sourceTree = "<group>";
-		};
-		BA586B0104204C38AB86FA74 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				471972E340A44482820D71DA /* SpaceMono-Regular.ttf */,
-				B942DFEB16884ADA9FCC2B2B /* gong-gothic.ttf */,
-				73447934B58C4E12AFB5A97D /* pretendard.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -222,9 +222,9 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3E461D99554A48A4959DE609 /* SplashScreen.storyboard in Resources */,
 				F68816078CEE96EC4E6245CB /* PrivacyInfo.xcprivacy in Resources */,
-				5E50C23D303E4A9F88AAE013 /* SpaceMono-Regular.ttf in Resources */,
 				4AFEF9FC602640F99CC6E236 /* gong-gothic.ttf in Resources */,
 				BF41FDC1D9E94E4A82DB4D9A /* pretendard.ttf in Resources */,
+				6547FE853D124C81ADF68E27 /* gong-gothic-light.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,9 @@ export default function RootLayout() {
     GongGothic: require("../assets/fonts/gong-gothic.ttf"),
     GongGothicLight: require("../assets/fonts/gong-gothic-light.ttf"),
     Pretendard: require("../assets/fonts/pretendard.ttf"),
+    NotoSans: require("../assets/fonts/NotoSansKR-Regular.ttf"),
+    NotoSansBold: require("../assets/fonts/NotoSansKR-Bold.ttf"),
+    NotoSansExtraBold: require("../assets/fonts/NotoSansKR-ExtraBold.ttf"),
   });
 
   const [appLoaded, setAppLoaded] = useState(false);
@@ -39,7 +42,7 @@ export default function RootLayout() {
   ) : (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="register" options={{ headerShown: false }} />
+      <Stack.Screen name="register/index" options={{ headerShown: false }} />
     </Stack>
   );
 }

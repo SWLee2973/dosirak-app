@@ -21,7 +21,7 @@ const Introduction = () => {
       </View>
       <View className="flex-row">
         <FontText font="GongGothic" className="text-[36px]">
-          도시락
+          도시락{" "}
         </FontText>
         <FontText font="GongGothicLight" className="text-[36px]">
           어때요?

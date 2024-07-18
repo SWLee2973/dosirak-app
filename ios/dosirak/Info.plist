@@ -75,9 +75,9 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SpaceMono-Regular.ttf</string>
 		<string>gong-gothic.ttf</string>
 		<string>pretendard.ttf</string>
+		<string>gong-gothic-light.ttf</string>
 	</array>
 </dict>
 </plist>
