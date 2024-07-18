@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import FontText from "../common/FontText";
+import LoginFooter from "./LoginFooter";
 
 const MENUITEM = ["아이디 찾기", "비밀번호 찾기", "회원가입"];
 
@@ -28,23 +29,7 @@ const SNSLogin = () => {
           />
         </TouchableOpacity>
       </View>
-      <View className="flex-row gap-x-4 pt-4">
-        <TouchableOpacity className="justify-center">
-          <FontText className="text-[12px] text-gray700">아이디 찾기</FontText>
-        </TouchableOpacity>
-        <View className="border-[0.5px] border-gray700" />
-        <TouchableOpacity className="justify-center">
-          <FontText className="text-[12px] text-gray700">
-            비밀번호 찾기
-          </FontText>
-        </TouchableOpacity>
-        <View className="border-[0.5px] border-gray700" />
-        <TouchableOpacity className="justify-center">
-          <FontText className="text-[12px] text-gray700">
-            회원가입 하기
-          </FontText>
-        </TouchableOpacity>
-      </View>
+      <LoginFooter />
     </View>
   );
 };

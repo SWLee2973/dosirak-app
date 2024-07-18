@@ -5,6 +5,9 @@ import {
   Touchable,
   TouchableOpacity,
   Pressable,
+  TouchableWithoutFeedback,
+  Keyboard,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import React from "react";
@@ -26,7 +29,7 @@ const LoginForm = () => {
   const handleLogin = handleSubmit((data) => console.log(data));
 
   return (
-    <View className="my-12">
+    <KeyboardAvoidingView className="my-12">
       <View className="mb-9 h-[168px] justify-between">
         <FormInput<ILoginInput>
           control={control}
@@ -50,6 +53,7 @@ const LoginForm = () => {
           labelStyle="text-[16px] font-[NotoSans]"
           inputStyle="h-12 rounded border-[1px] border-gray300 px-4 pb-0 pt-0 font-[NotoSans] text-sm"
           errorLabelStyle="absolute -bottom-5 ml-1"
+          eyeButtonStyle="absolute right-2 bottom-3"
         />
       </View>
       <TouchableOpacity
@@ -63,7 +67,7 @@ const LoginForm = () => {
           로그인
         </FontText>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

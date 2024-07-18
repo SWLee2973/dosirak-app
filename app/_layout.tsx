@@ -6,6 +6,7 @@ import "react-native-reanimated";
 
 import Splash from "@/components/common/Splash";
 import authStore, { IAuthStore } from "@/store/authStore";
+import { Platform, StatusBar } from "react-native";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -22,6 +23,10 @@ export default function RootLayout() {
 
   const [appLoaded, setAppLoaded] = useState(false);
   const { isLoggedIn } = authStore<IAuthStore>((state) => state);
+
+  if (Platform.OS === "android") {
+    StatusBar.setBackgroundColor("#145044");
+  }
 
   useEffect(() => {
     SplashScreen.hideAsync();

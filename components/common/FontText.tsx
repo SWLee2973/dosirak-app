@@ -14,7 +14,12 @@ type TProps = TextProps & {
 };
 
 const FontText = ({ style, font = "NotoSans", ...rest }: TProps) => {
-  return <Text style={[{ fontFamily: font }, style]} {...rest} />;
+  return (
+    <Text
+      style={[{ fontFamily: font, includeFontPadding: false }, style]}
+      {...rest}
+    />
+  );
 };
 
 export default FontText;
