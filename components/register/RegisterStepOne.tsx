@@ -1,4 +1,4 @@
-import { View, Text, Animated } from "react-native";
+import { View, Text, Animated, KeyboardAvoidingView } from "react-native";
 import React, { useEffect, useRef } from "react";
 import RegisterProgressInfo from "./RegisterProgressInfo";
 import FormInput from "../common/FormInput";
@@ -39,7 +39,7 @@ const RegisterStepOne = ({ step, control }: TProps) => {
 
   return (
     <Animated.View
-      style={{ opacity: loader }}
+      style={{ opacity: loader, zIndex: step === 0 ? 10 : -1 }}
       className="absolute left-9 top-16 w-full"
     >
       <RegisterProgressInfo step={step} information="이름을 알려주세요." />
