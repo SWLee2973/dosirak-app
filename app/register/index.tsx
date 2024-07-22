@@ -48,7 +48,7 @@ const register = () => {
           <RegisterStepOne step={step} control={control} />
           <RegisterStepTwo step={step} control={control} />
 
-          <View className="h-60 justify-end gap-y-4 pb-24">
+          <View className="h-60 justify-end gap-y-4 pb-32">
             <TouchableOpacity
               onPress={handleNext}
               className="items-center justify-center rounded border-2 border-primary py-4"

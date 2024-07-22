@@ -7,7 +7,7 @@ import { IRegisterInfo } from "@/app/register";
 
 type TProps = {
   step: number;
-  control: Control<any, any>;
+  control: Control<IRegisterInfo, any>;
 };
 
 const RegisterStepOne = ({ step, control }: TProps) => {

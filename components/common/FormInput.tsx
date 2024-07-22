@@ -6,6 +6,7 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   TextInput,
+  TextInputProps,
   TouchableOpacity,
   TouchableWithoutFeedback,
   View,
@@ -22,9 +23,7 @@ type TProps<T> = {
   inputStyle?: string;
   errorLabelStyle?: string;
   eyeButtonStyle?: string;
-  placeholder?: string;
-  secureTextEntry?: boolean;
-};
+} & TextInputProps;
 
 const FormInput = <T extends {}>({
   control,
@@ -67,6 +66,7 @@ const FormInput = <T extends {}>({
             onChangeText={onChange}
             value={value}
             secureTextEntry={secureTextEntry}
+            {...rest}
           />
           {rest.secureTextEntry && isFocused && (
             <TouchableOpacity
