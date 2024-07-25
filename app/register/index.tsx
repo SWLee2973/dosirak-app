@@ -18,6 +18,7 @@ import FormInput from "@/components/common/FormInput";
 import { useForm } from "react-hook-form";
 import RegisterStepOne from "@/components/register/RegisterStepOne";
 import RegisterStepTwo from "@/components/register/RegisterStepTwo";
+import RegisterStepThree from "@/components/register/RegisterStepThree";
 
 export interface IRegisterInfo {
   name: string;
@@ -25,6 +26,7 @@ export interface IRegisterInfo {
   authCode: string;
   username: string;
   password: string;
+  passwordConfirm: string;
 }
 
 const register = () => {
@@ -47,6 +49,7 @@ const register = () => {
         <View className="h-full justify-end px-9 py-16">
           <RegisterStepOne step={step} control={control} />
           <RegisterStepTwo step={step} control={control} />
+          <RegisterStepThree step={step} control={control} />
 
           <View className="h-60 justify-end gap-y-4 pb-32">
             <TouchableOpacity

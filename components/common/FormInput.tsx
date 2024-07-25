@@ -23,6 +23,7 @@ type TProps<T> = {
   inputStyle?: string;
   errorLabelStyle?: string;
   eyeButtonStyle?: string;
+  secureTextEntry?: boolean;
 } & TextInputProps;
 
 const FormInput = <T extends {}>({
@@ -36,18 +37,20 @@ const FormInput = <T extends {}>({
   eyeButtonStyle,
   placeholder,
   name,
+  secureTextEntry,
   ...rest
 }: TProps<T>) => {
   const { errors } = useFormState({
     control,
   });
-  const [secureTextEntry, setSecureTextEntry] = useState(rest.secureTextEntry);
+  const [innerSecureTextEntry, setInnerSecureTextEntry] =
+    useState(secureTextEntry);
   const [isEnable, setIsEnable] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
 
   const handleSecurity = () => {
     setIsEnable(!isEnable);
-    setSecureTextEntry(!secureTextEntry);
+    setInnerSecureTextEntry(!innerSecureTextEntry);
   };
 
   return (
@@ -65,10 +68,10 @@ const FormInput = <T extends {}>({
             placeholder={placeholder}
             onChangeText={onChange}
             value={value}
-            secureTextEntry={secureTextEntry}
+            secureTextEntry={innerSecureTextEntry}
             {...rest}
           />
-          {rest.secureTextEntry && isFocused && (
+          {secureTextEntry && isFocused && (
             <TouchableOpacity
               onPress={handleSecurity}
               className={eyeButtonStyle}

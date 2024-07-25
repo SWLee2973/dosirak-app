@@ -18,7 +18,7 @@ type TProps = {
   control: Control<IRegisterInfo, any>;
 };
 
-const RegisterStepTwo = ({ step, control }: TProps) => {
+const RegisterStepThree = ({ step, control }: TProps) => {
   const loader = useRef(new Animated.Value(0)).current;
 
   const load = () => {
@@ -38,72 +38,82 @@ const RegisterStepTwo = ({ step, control }: TProps) => {
   };
 
   useEffect(() => {
-    if (step === 1) {
+    if (step === 2) {
       load();
-    } else if (step === 0 || step === 2) {
+    } else if (step === 1 || step === 3) {
       unLoad();
     }
   }, [step]);
 
-  const [authState, setAuthState] = useState({
-    isAvailPhoneNumber: false,
-    isCodeSent: false,
-    authCode: "",
+  const [loginInfo, setLoginInfo] = useState({
+    username: "",
+    password: "",
+    passwordConfirm: "",
   });
 
-  const handlePhoneNumber = (text: string) => {
-    if (text.match(/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/)) {
-      setAuthState({ ...authState, isAvailPhoneNumber: true });
-    } else setAuthState({ ...authState, isAvailPhoneNumber: false });
+  const handleLoginInfo = (key: keyof typeof loginInfo) => (text: string) => {
+    setLoginInfo({ ...loginInfo, [key]: text });
   };
 
-  const handleSendCode = () => {
-    setAuthState({ ...authState, isCodeSent: true });
+  const handleCheckDuplicate = () => {
+    // setAuthState({ ...authState, isCodeSent: true });
   };
 
   return (
     <Animated.View
-      style={{ opacity: loader, zIndex: step === 1 ? 10 : -1 }}
+      style={{ opacity: loader, zIndex: step === 2 ? 10 : -1 }}
       className="absolute left-9 top-16 w-full"
     >
       <RegisterProgressInfo
         step={step}
-        information="휴대폰 번호를"
-        additionalText="알려주세요."
+        information="사용할 아이디와"
+        additionalText="비밀번호를 알려주세요."
       />
       <View className="mt-12 flex-1 justify-center">
         <View className="relative">
           <FormInput<IRegisterInfo>
             control={control}
-            name="phone"
-            label="휴대폰 번호"
-            placeholder="휴대폰 번호 입력"
+            name="username"
+            label="아이디"
+            placeholder="아이디 입력"
             containerStyle="gap-y-1"
             labelStyle="text-[17px] font-[NotoSansBold] text-primary"
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
-            onChangeText={handlePhoneNumber}
+            onChangeText={handleLoginInfo("username")}
           />
           <RegisterInfoCheckButton
-            enabled={authState.isAvailPhoneNumber}
+            enabled={loginInfo.username.length > 0}
             location="bottom-1.5 right-0"
-            innerText="인증 요청"
-            onPress={handleSendCode}
+            innerText="중복 확인"
+            onPress={handleCheckDuplicate}
           />
         </View>
-        <View className="relative">
+        <View className="relative mt-3">
           <FormInput<IRegisterInfo>
+            secureTextEntry
             control={control}
-            name="authCode"
-            label="휴대폰 인증"
-            placeholder="인증 번호 입력"
-            containerStyle="gap-y-1 mt-6"
+            name="password"
+            label="비밀번호"
+            placeholder="비밀번호 입력"
+            containerStyle="gap-y-1"
             labelStyle="text-[17px] font-[NotoSansBold] text-primary"
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
+            eyeButtonStyle="absolute right-2 bottom-3"
+            onChangeText={handleLoginInfo("password")}
           />
-          <RegisterInfoCheckButton
-            enabled={authState.isCodeSent}
-            location="bottom-1.5 right-0"
-            innerText="확인"
+        </View>
+        <View className="relative mt-3">
+          <FormInput<IRegisterInfo>
+            secureTextEntry
+            control={control}
+            name="passwordConfirm"
+            label="비밀번호 확인"
+            placeholder="비밀번호 입력"
+            containerStyle="gap-y-1"
+            labelStyle="text-[17px] font-[NotoSansBold] text-primary"
+            inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
+            eyeButtonStyle="absolute right-2 bottom-3"
+            onChangeText={handleLoginInfo("passwordConfirm")}
           />
         </View>
       </View>
@@ -111,4 +121,4 @@ const RegisterStepTwo = ({ step, control }: TProps) => {
   );
 };
 
-export default RegisterStepTwo;
+export default RegisterStepThree;
