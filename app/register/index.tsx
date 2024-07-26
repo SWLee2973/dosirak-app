@@ -19,6 +19,7 @@ import { useForm } from "react-hook-form";
 import RegisterStepOne from "@/components/register/RegisterStepOne";
 import RegisterStepTwo from "@/components/register/RegisterStepTwo";
 import RegisterStepThree from "@/components/register/RegisterStepThree";
+import RegisterStepFour from "@/components/register/RegisterStepFour";
 
 export interface IRegisterInfo {
   name: string;
@@ -32,6 +33,7 @@ export interface IRegisterInfo {
 const register = () => {
   const { control, handleSubmit } = useForm<IRegisterInfo>();
   const [step, setStep] = useState(0);
+  const [isAgreed, setIsAgreed] = useState(false);
 
   const handleNext = () => {
     setStep(step + 1);
@@ -50,16 +52,31 @@ const register = () => {
           <RegisterStepOne step={step} control={control} />
           <RegisterStepTwo step={step} control={control} />
           <RegisterStepThree step={step} control={control} />
+          <RegisterStepFour
+            step={step}
+            control={control}
+            isAgreed={isAgreed}
+            setIsAgreed={setIsAgreed}
+          />
 
           <View className="h-60 justify-end gap-y-4 pb-32">
-            <TouchableOpacity
-              onPress={handleNext}
-              className="items-center justify-center rounded border-2 border-primary py-4"
-            >
-              <FontText font="NotoSansBold" className="text-primary">
-                다음으로
-              </FontText>
-            </TouchableOpacity>
+            {step !== 3 && (
+              <TouchableOpacity
+                onPress={handleNext}
+                className="items-center justify-center rounded border-2 border-primary py-4"
+              >
+                <FontText font="NotoSansBold" className="text-primary">
+                  다음으로
+                </FontText>
+              </TouchableOpacity>
+            )}
+            {step === 3 && (
+              <TouchableOpacity className="items-center justify-center rounded border-2 border-primary py-4">
+                <FontText font="NotoSansBold" className="text-primary">
+                  가입하기
+                </FontText>
+              </TouchableOpacity>
+            )}
             {step !== 0 && (
               <TouchableOpacity
                 onPress={handlePrev}
