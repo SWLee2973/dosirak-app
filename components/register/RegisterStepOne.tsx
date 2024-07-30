@@ -8,9 +8,10 @@ import { IRegisterInfo } from "@/app/register";
 type TProps = {
   step: number;
   control: Control<IRegisterInfo, any>;
+  setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const RegisterStepOne = ({ step, control }: TProps) => {
+const RegisterStepOne = ({ step, control, setIsDisableNext }: TProps) => {
   const loader = useRef(new Animated.Value(0)).current;
 
   const load = () => {
@@ -37,6 +38,12 @@ const RegisterStepOne = ({ step, control }: TProps) => {
     }
   }, [step]);
 
+  const handleNameChange = (text: string) => {
+    if (text.length > 0) {
+      setIsDisableNext(false);
+    } else setIsDisableNext(true);
+  };
+
   return (
     <Animated.View
       style={{ opacity: loader, zIndex: step === 0 ? 10 : -1 }}
@@ -51,7 +58,8 @@ const RegisterStepOne = ({ step, control }: TProps) => {
           placeholder="이름 입력"
           containerStyle="gap-y-1"
           labelStyle="text-[17px] font-[NotoSansBold] text-primary"
-          inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
+          inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans]"
+          onChangeText={handleNameChange}
         />
       </View>
     </Animated.View>

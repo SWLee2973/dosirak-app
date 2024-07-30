@@ -56,6 +56,14 @@ const RegisterStepFour = ({ step, isAgreed, control, setIsAgreed }: TProps) => {
     marketing: false,
   });
 
+  useEffect(() => {
+    if (checkState.marketing && checkState.privacy && checkState.service) {
+      setIsAgreed(true);
+    } else {
+      setIsAgreed(false);
+    }
+  }, [checkState.marketing, checkState.privacy, checkState.service]);
+
   const handleAllCheck = () => {
     setIsAgreed(!isAgreed);
     if (isAgreed) {
@@ -75,7 +83,7 @@ const RegisterStepFour = ({ step, isAgreed, control, setIsAgreed }: TProps) => {
 
   return (
     <Animated.View
-      style={{ opacity: loader, zIndex: step === 2 ? 10 : -1 }}
+      style={{ opacity: loader, zIndex: step === 3 ? 10 : -1 }}
       className="absolute left-9 top-16 w-full"
     >
       <RegisterProgressInfo

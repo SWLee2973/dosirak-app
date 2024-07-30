@@ -16,9 +16,10 @@ import RegisterInfoCheckButton from "./RegisterInfoCheckButton";
 type TProps = {
   step: number;
   control: Control<IRegisterInfo, any>;
+  setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const RegisterStepTwo = ({ step, control }: TProps) => {
+const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
   const loader = useRef(new Animated.Value(0)).current;
 
   const load = () => {
@@ -49,6 +50,8 @@ const RegisterStepTwo = ({ step, control }: TProps) => {
     isAvailPhoneNumber: false,
     isCodeSent: false,
     authCode: "",
+    isCodeEntered: false,
+    isAuthCodeChecked: false,
   });
 
   const handlePhoneNumber = (text: string) => {
@@ -60,6 +63,29 @@ const RegisterStepTwo = ({ step, control }: TProps) => {
   const handleSendCode = () => {
     setAuthState({ ...authState, isCodeSent: true });
   };
+
+  const handleConfirmAuthCode = (text: string) => {
+    console.log("text : ", text.length);
+    console.log("authState : ", authState);
+    if (text.length > 0) {
+      setAuthState({ ...authState, authCode: text, isCodeEntered: true });
+    } else setAuthState({ ...authState, authCode: text, isCodeEntered: false });
+
+    // setAuthState({ ...authState, authCode: text });
+  };
+
+  const handleCheckAuthCode = () => {
+    if (authState.authCode === "1111") {
+      setIsDisableNext(false);
+      setAuthState({ ...authState, isAuthCodeChecked: true });
+    }
+  };
+
+  useEffect(() => {
+    if (step === 1 && authState.isAvailPhoneNumber && authState.isCodeSent) {
+      setIsDisableNext(false);
+    }
+  }, [step]);
 
   return (
     <Animated.View
@@ -99,12 +125,19 @@ const RegisterStepTwo = ({ step, control }: TProps) => {
             containerStyle="gap-y-1 mt-6"
             labelStyle="text-[17px] font-[NotoSansBold] text-primary"
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
+            onChangeText={handleConfirmAuthCode}
           />
           <RegisterInfoCheckButton
-            enabled={authState.isCodeSent}
+            enabled={authState.isCodeEntered}
             location="bottom-1.5 right-0"
             innerText="확인"
+            onPress={handleCheckAuthCode}
           />
+          {authState.isAuthCodeChecked && (
+            <FontText className="absolute -bottom-6 text-[15px] text-green-700">
+              인증되었습니다.
+            </FontText>
+          )}
         </View>
       </View>
     </Animated.View>

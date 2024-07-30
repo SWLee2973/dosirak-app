@@ -33,15 +33,20 @@ export interface IRegisterInfo {
 const register = () => {
   const { control, handleSubmit } = useForm<IRegisterInfo>();
   const [step, setStep] = useState(0);
+  const [isDisabled, setIsDisabled] = useState(true);
   const [isAgreed, setIsAgreed] = useState(false);
 
   const handleNext = () => {
+    setIsDisabled(true);
     setStep(step + 1);
   };
 
   const handlePrev = () => {
     setStep(step - 1);
+    setIsDisabled(false);
   };
+
+  const handleRegister = handleSubmit((data) => console.log(data));
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -49,8 +54,16 @@ const register = () => {
         <RegisterHeader />
         <RegisterStatusBar currentStep={step} />
         <View className="h-full justify-end px-9 py-16">
-          <RegisterStepOne step={step} control={control} />
-          <RegisterStepTwo step={step} control={control} />
+          <RegisterStepOne
+            step={step}
+            control={control}
+            setIsDisableNext={setIsDisabled}
+          />
+          <RegisterStepTwo
+            step={step}
+            control={control}
+            setIsDisableNext={setIsDisabled}
+          />
           <RegisterStepThree step={step} control={control} />
           <RegisterStepFour
             step={step}
@@ -63,15 +76,25 @@ const register = () => {
             {step !== 3 && (
               <TouchableOpacity
                 onPress={handleNext}
-                className="items-center justify-center rounded border-2 border-primary py-4"
+                disabled={isDisabled}
+                className="items-center justify-center rounded border-[1px] border-primary py-4"
+                style={{
+                  backgroundColor: isDisabled ? "transparent" : "#145044",
+                }}
               >
-                <FontText font="NotoSansBold" className="text-primary">
+                <FontText
+                  font="NotoSansBold"
+                  className={isDisabled ? "text-primary" : "text-white"}
+                >
                   다음으로
                 </FontText>
               </TouchableOpacity>
             )}
             {step === 3 && (
-              <TouchableOpacity className="items-center justify-center rounded border-2 border-primary py-4">
+              <TouchableOpacity
+                className="items-center justify-center rounded border-2 border-primary py-4"
+                onPress={handleRegister}
+              >
                 <FontText font="NotoSansBold" className="text-primary">
                   가입하기
                 </FontText>
@@ -80,7 +103,7 @@ const register = () => {
             {step !== 0 && (
               <TouchableOpacity
                 onPress={handlePrev}
-                className="items-center justify-center rounded bg-primary py-4"
+                className="items-center justify-center rounded border-[1px] border-primary bg-primary py-4"
               >
                 <FontText font="NotoSansBold" className="text-white">
                   이전으로
