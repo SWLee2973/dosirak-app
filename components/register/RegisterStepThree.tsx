@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import RegisterProgressInfo from "./RegisterProgressInfo";
 import FormInput from "../common/FormInput";
 import { Control } from "react-hook-form";
-import { IRegisterInfo } from "@/app/register";
+import { IRegisterInfo } from "@/app/(auth)/register";
 import FontText from "../common/FontText";
 import RegisterInfoCheckButton from "./RegisterInfoCheckButton";
 

@@ -1,23 +1,25 @@
-import {
-  View,
-  Text,
-  Animated,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-} from "react-native";
+import { IRegisterInfo } from "@/app/(auth)/register";
 import React, { useEffect, useRef, useState } from "react";
-import RegisterProgressInfo from "./RegisterProgressInfo";
-import FormInput from "../common/FormInput";
 import { Control } from "react-hook-form";
-import { IRegisterInfo } from "@/app/register";
+import { Alert, Animated, View } from "react-native";
 import FontText from "../common/FontText";
+import FormInput from "../common/FormInput";
 import RegisterInfoCheckButton from "./RegisterInfoCheckButton";
+import RegisterProgressInfo from "./RegisterProgressInfo";
+import RegisterTimer from "./RegisterTimer";
 
 type TProps = {
   step: number;
   control: Control<IRegisterInfo, any>;
   setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export interface IAuthState {
+  isAvailPhoneNumber: boolean;
+  isCodeSent: boolean;
+  authCode: string;
+  isAuthCodeChecked: number;
+}
 
 const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
   const loader = useRef(new Animated.Value(0)).current;
@@ -50,9 +52,11 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
     isAvailPhoneNumber: false,
     isCodeSent: false,
     authCode: "",
-    isCodeEntered: false,
-    isAuthCodeChecked: false,
+    isAuthCodeChecked: 0,
   });
+
+  const [typeAuthCode, setTypeAuthCode] = useState("");
+  const [timerRunning, setTimerRunning] = useState(false);
 
   const handlePhoneNumber = (text: string) => {
     if (text.match(/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/)) {
@@ -61,23 +65,27 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
   };
 
   const handleSendCode = () => {
-    setAuthState({ ...authState, isCodeSent: true });
+    const authCode = String(Math.floor(Math.random() * 1000000)).padStart(
+      6,
+      "0",
+    );
+
+    setAuthState({ ...authState, isCodeSent: true, authCode });
+    setTimerRunning(true);
+
+    Alert.alert(`인증번호는 ${authCode} 입니다.`);
   };
 
   const handleConfirmAuthCode = (text: string) => {
-    console.log("text : ", text.length);
-    console.log("authState : ", authState);
-    if (text.length > 0) {
-      setAuthState({ ...authState, authCode: text, isCodeEntered: true });
-    } else setAuthState({ ...authState, authCode: text, isCodeEntered: false });
-
-    // setAuthState({ ...authState, authCode: text });
+    setTypeAuthCode(text);
   };
 
   const handleCheckAuthCode = () => {
-    if (authState.authCode === "1111") {
+    if (authState.authCode === typeAuthCode && timerRunning) {
       setIsDisableNext(false);
-      setAuthState({ ...authState, isAuthCodeChecked: true });
+      setAuthState({ ...authState, isAuthCodeChecked: 1 });
+    } else if (authState.authCode !== typeAuthCode && timerRunning) {
+      setAuthState({ ...authState, isAuthCodeChecked: 2 });
     }
   };
 
@@ -108,15 +116,24 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
             labelStyle="text-[17px] font-[NotoSansBold] text-primary"
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
             onChangeText={handlePhoneNumber}
+            editable={authState.isAuthCodeChecked !== 1}
           />
           <RegisterInfoCheckButton
-            enabled={authState.isAvailPhoneNumber}
+            enabled={authState.isAvailPhoneNumber && !authState.isCodeSent}
             location="bottom-1.5 right-0"
             innerText="인증 요청"
             onPress={handleSendCode}
           />
         </View>
         <View className="relative">
+          {timerRunning && authState.isAuthCodeChecked !== 1 && (
+            <RegisterTimer
+              isRunning={timerRunning}
+              authState={authState}
+              setIsRunning={setTimerRunning}
+              setAuthState={setAuthState}
+            />
+          )}
           <FormInput<IRegisterInfo>
             control={control}
             name="authCode"
@@ -126,16 +143,24 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
             labelStyle="text-[17px] font-[NotoSansBold] text-primary"
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
             onChangeText={handleConfirmAuthCode}
+            editable={authState.isAuthCodeChecked !== 1}
           />
           <RegisterInfoCheckButton
-            enabled={authState.isCodeEntered}
+            enabled={
+              typeAuthCode.length > 0 && authState.isAuthCodeChecked !== 1
+            }
             location="bottom-1.5 right-0"
             innerText="확인"
             onPress={handleCheckAuthCode}
           />
-          {authState.isAuthCodeChecked && (
+          {authState.isAuthCodeChecked === 1 && (
             <FontText className="absolute -bottom-6 text-[15px] text-green-700">
               인증되었습니다.
+            </FontText>
+          )}
+          {authState.isAuthCodeChecked === 2 && (
+            <FontText className="absolute -bottom-6 text-[15px] text-red-700">
+              인증번호를 정확히 입력해 주세요.
             </FontText>
           )}
         </View>

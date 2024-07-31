@@ -27,7 +27,7 @@ const RegisterStatusBar = ({ currentStep }: TProps) => {
   });
 
   return (
-    <View className="h-1.5 bg-gray300">
+    <View className="h-1 bg-gray300">
       <Animated.View style={{ width, flex: 1 }} className="bg-primary" />
     </View>
   );

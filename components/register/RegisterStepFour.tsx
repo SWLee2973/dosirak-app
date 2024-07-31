@@ -1,20 +1,11 @@
-import {
-  View,
-  Text,
-  Animated,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { IRegisterInfo } from "@/app/(auth)/register";
 import React, { useEffect, useRef, useState } from "react";
-import RegisterProgressInfo from "./RegisterProgressInfo";
-import FormInput from "../common/FormInput";
 import { Control } from "react-hook-form";
-import { IRegisterInfo } from "@/app/register";
-import FontText from "../common/FontText";
-import RegisterInfoCheckButton from "./RegisterInfoCheckButton";
+import { Animated, Image, TouchableOpacity, View } from "react-native";
 import { Shadow } from "react-native-shadow-2";
+import FontText from "../common/FontText";
 import RegisterCheckBox from "./RegisterCheckBox";
+import RegisterProgressInfo from "./RegisterProgressInfo";
 
 type TProps = {
   step: number;
