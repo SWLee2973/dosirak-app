@@ -12,9 +12,16 @@ type TProps = {
   isAgreed: boolean;
   control: Control<IRegisterInfo, any>;
   setIsAgreed: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const RegisterStepFour = ({ step, isAgreed, control, setIsAgreed }: TProps) => {
+const RegisterStepFour = ({
+  step,
+  isAgreed,
+  control,
+  setIsAgreed,
+  setIsDisableNext,
+}: TProps) => {
   const loader = useRef(new Animated.Value(0)).current;
 
   const load = () => {
@@ -52,6 +59,12 @@ const RegisterStepFour = ({ step, isAgreed, control, setIsAgreed }: TProps) => {
       setIsAgreed(true);
     } else {
       setIsAgreed(false);
+    }
+
+    if (checkState.service && checkState.privacy) {
+      setIsDisableNext(false);
+    } else {
+      setIsDisableNext(true);
     }
   }, [checkState.marketing, checkState.privacy, checkState.service]);
 

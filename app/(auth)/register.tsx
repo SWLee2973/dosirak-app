@@ -64,12 +64,17 @@ const register = () => {
             control={control}
             setIsDisableNext={setIsDisabled}
           />
-          <RegisterStepThree step={step} control={control} />
+          <RegisterStepThree
+            step={step}
+            control={control}
+            setIsDisableNext={setIsDisabled}
+          />
           <RegisterStepFour
             step={step}
             control={control}
             isAgreed={isAgreed}
             setIsAgreed={setIsAgreed}
+            setIsDisableNext={setIsDisabled}
           />
 
           <View className="h-60 justify-end gap-y-4 pb-32">
@@ -92,10 +97,17 @@ const register = () => {
             )}
             {step === 3 && (
               <TouchableOpacity
-                className="items-center justify-center rounded border-2 border-primary py-4"
                 onPress={handleRegister}
+                disabled={isDisabled}
+                className="items-center justify-center rounded border-[1px] border-primary py-4"
+                style={{
+                  backgroundColor: isDisabled ? "transparent" : "#145044",
+                }}
               >
-                <FontText font="NotoSansBold" className="text-primary">
+                <FontText
+                  font="NotoSansBold"
+                  className={isDisabled ? "text-primary" : "text-white"}
+                >
                   가입하기
                 </FontText>
               </TouchableOpacity>

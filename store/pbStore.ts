@@ -16,7 +16,7 @@ const pbStore = create<IPbStore>((set) => ({
       clear: async () => AsyncStorage.removeItem("pb_auth"),
     });
 
-    const pbInstance = new PocketBase(process.env.PB_URL, store);
+    const pbInstance = new PocketBase(process.env.EXPO_PUBLIC_PB_URL, store);
 
     set({ pb: pbInstance });
   },

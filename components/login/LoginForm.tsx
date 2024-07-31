@@ -1,18 +1,8 @@
-import {
-  View,
-  Text,
-  TextInput,
-  Touchable,
-  TouchableOpacity,
-  Pressable,
-  TouchableWithoutFeedback,
-  Keyboard,
-  KeyboardAvoidingView,
-} from "react-native";
-import { useForm, Controller } from "react-hook-form";
 import React from "react";
-import FormInput from "../common/FormInput";
+import { useForm } from "react-hook-form";
+import { KeyboardAvoidingView, TouchableOpacity, View } from "react-native";
 import FontText from "../common/FontText";
+import FormInput from "../common/FormInput";
 
 export interface ILoginInput {
   username: string;

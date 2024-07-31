@@ -1,24 +1,21 @@
-import {
-  View,
-  Text,
-  Animated,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-} from "react-native";
-import React, { useEffect, useRef, useState } from "react";
-import RegisterProgressInfo from "./RegisterProgressInfo";
-import FormInput from "../common/FormInput";
-import { Control } from "react-hook-form";
 import { IRegisterInfo } from "@/app/(auth)/register";
-import FontText from "../common/FontText";
+import React, { useEffect, useRef, useState } from "react";
+import { Control } from "react-hook-form";
+import { Animated, View } from "react-native";
+import FormInput from "../common/FormInput";
 import RegisterInfoCheckButton from "./RegisterInfoCheckButton";
+import RegisterProgressInfo from "./RegisterProgressInfo";
+import pbStore from "@/store/pbStore";
+import FontText from "../common/FontText";
 
 type TProps = {
   step: number;
   control: Control<IRegisterInfo, any>;
+  setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const RegisterStepThree = ({ step, control }: TProps) => {
+const RegisterStepThree = ({ step, control, setIsDisableNext }: TProps) => {
+  const pb = pbStore((state) => state.pb);
   const loader = useRef(new Animated.Value(0)).current;
 
   const load = () => {
@@ -51,13 +48,39 @@ const RegisterStepThree = ({ step, control }: TProps) => {
     passwordConfirm: "",
   });
 
+  // 0: 확인 안됨, 1: 사용 가능, 2: 중복
+  const [isDuplicate, setIsDuplicate] = useState(0);
+
   const handleLoginInfo = (key: keyof typeof loginInfo) => (text: string) => {
     setLoginInfo({ ...loginInfo, [key]: text });
+
+    if (key === "username" && isDuplicate !== 0) {
+      setIsDuplicate(0);
+    }
   };
 
-  const handleCheckDuplicate = () => {
-    // setAuthState({ ...authState, isCodeSent: true });
+  const handleCheckDuplicate = async () => {
+    const { username } = loginInfo;
+
+    const existData = await pb?.collection("users").getList(1, 1, {
+      filter: `username ?= "${username}"`,
+    });
+
+    if (existData?.totalItems === 0) setIsDuplicate(1);
+    if (existData?.totalItems === 1) setIsDuplicate(2);
   };
+
+  useEffect(() => {
+    if (
+      loginInfo.password !== "" &&
+      loginInfo.password === loginInfo.passwordConfirm &&
+      isDuplicate === 1
+    ) {
+      setIsDisableNext(false);
+    } else {
+      setIsDisableNext(true);
+    }
+  }, [isDuplicate, loginInfo.password, loginInfo.passwordConfirm]);
 
   return (
     <Animated.View
@@ -80,6 +103,7 @@ const RegisterStepThree = ({ step, control }: TProps) => {
             labelStyle="text-[17px] font-[NotoSansBold] text-primary"
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
             onChangeText={handleLoginInfo("username")}
+            autoCapitalize="none"
           />
           <RegisterInfoCheckButton
             enabled={loginInfo.username.length > 0}
@@ -87,8 +111,18 @@ const RegisterStepThree = ({ step, control }: TProps) => {
             innerText="중복 확인"
             onPress={handleCheckDuplicate}
           />
+          {isDuplicate === 1 && (
+            <FontText className="absolute -bottom-6 text-[15px] text-green-700">
+              사용 가능한 아이디입니다.
+            </FontText>
+          )}
+          {isDuplicate === 2 && (
+            <FontText className="absolute -bottom-6 text-[15px] text-red-700">
+              이미 사용중인 아이디입니다.
+            </FontText>
+          )}
         </View>
-        <View className="relative mt-3">
+        <View className="relative mt-6">
           <FormInput<IRegisterInfo>
             secureTextEntry
             control={control}
@@ -102,7 +136,7 @@ const RegisterStepThree = ({ step, control }: TProps) => {
             onChangeText={handleLoginInfo("password")}
           />
         </View>
-        <View className="relative mt-3">
+        <View className="relative mt-6">
           <FormInput<IRegisterInfo>
             secureTextEntry
             control={control}

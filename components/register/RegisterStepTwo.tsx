@@ -78,6 +78,9 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
 
   const handleConfirmAuthCode = (text: string) => {
     setTypeAuthCode(text);
+    if (authState.isAuthCodeChecked === 2) {
+      setAuthState({ ...authState, isAuthCodeChecked: 0 });
+    }
   };
 
   const handleCheckAuthCode = () => {
