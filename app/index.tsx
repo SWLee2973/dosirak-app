@@ -1,19 +1,34 @@
-import Introduction from "@/components/login/Introduction";
-import LoginForm from "@/components/login/LoginForm";
-import SNSLogin from "@/components/login/SNSLogin";
-import React from "react";
-import { Keyboard, TouchableWithoutFeedback } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import authStore from "@/store/authStore";
+import { useRootNavigationState, useRouter, useSegments } from "expo-router";
+import { useEffect } from "react";
+import { ActivityIndicator, View } from "react-native";
 
 const index = () => {
+  const { isInitialized, isLoggedIn } = authStore((state) => ({
+    isInitialized: state.isInitialized,
+    isLoggedIn: state.isLoggedIn,
+  }));
+
+  const router = useRouter();
+  const segments = useSegments();
+  const navigationState = useRootNavigationState();
+
+  useEffect(() => {
+    if (!isInitialized || !navigationState?.key) return;
+
+    const inAuthGroup = segments[0] === "(auth)";
+
+    if (!isLoggedIn && !inAuthGroup) {
+      router.replace("/(auth)/login");
+    } else if (isLoggedIn) {
+      router.replace("/(tabs)");
+    }
+  }, [segments, navigationState?.key, isInitialized]);
+
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView className="flex-1 justify-center bg-white px-9">
-        <Introduction />
-        <LoginForm />
-        <SNSLogin />
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+    <View className="flex-1 items-center justify-start">
+      {!navigationState.key ? <ActivityIndicator /> : <></>}
+    </View>
   );
 };
 

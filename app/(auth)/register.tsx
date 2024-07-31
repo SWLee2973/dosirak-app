@@ -24,7 +24,7 @@ import RegisterStepFour from "@/components/register/RegisterStepFour";
 export interface IRegisterInfo {
   name: string;
   phone: string;
-  authCode: string;
+  authCode?: string;
   username: string;
   password: string;
   passwordConfirm: string;

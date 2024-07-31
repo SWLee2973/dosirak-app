@@ -7,11 +7,18 @@ import "react-native-reanimated";
 import Splash from "@/components/common/Splash";
 import authStore, { IAuthStore } from "@/store/authStore";
 import { Platform, StatusBar } from "react-native";
+import pbStore from "@/store/pbStore";
+import { AuthProvider } from "@/context/auth";
+
+export const unstable_settings = {
+  initialRouteName: "(tabs)",
+};
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
+  const initializePocketBase = pbStore((state) => state.initializePocketBase);
   const [loaded] = useFonts({
     GongGothic: require("../assets/fonts/gong-gothic.ttf"),
     GongGothicLight: require("../assets/fonts/gong-gothic-light.ttf"),
@@ -21,8 +28,7 @@ export default function RootLayout() {
     NotoSansExtraBold: require("../assets/fonts/NotoSansKR-ExtraBold.ttf"),
   });
 
-  const [appLoaded, setAppLoaded] = useState(false);
-  const { isLoggedIn } = authStore<IAuthStore>((state) => state);
+  const [appLoaded, setAppLoaded] = useState(true);
 
   if (Platform.OS === "android") {
     StatusBar.setBackgroundColor("white");
@@ -38,16 +44,21 @@ export default function RootLayout() {
     }, 3500);
   }, []);
 
-  return appLoaded || !loaded ? (
-    <Splash />
-  ) : isLoggedIn ? (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-    </Stack>
-  ) : (
-    <Stack>
-      <Stack.Screen name="register/index" options={{ headerShown: false }} />
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+  useEffect(() => {
+    initializePocketBase();
+  }, [initializePocketBase]);
+
+  return appLoaded || !loaded ? <Splash /> : <RootLayoutNav />;
+}
+
+function RootLayoutNav() {
+  // const { isLoggedIn } = authStore<IAuthStore>((state) => state);
+
+  return (
+    <AuthProvider>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
+      </Stack>
+    </AuthProvider>
   );
 }
