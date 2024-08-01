@@ -1,6 +1,6 @@
 import { IRegisterInfo } from "@/app/(auth)/register";
 import React, { useEffect, useRef, useState } from "react";
-import { Control } from "react-hook-form";
+import { Control, UseFormSetValue } from "react-hook-form";
 import { Alert, Animated, View } from "react-native";
 import FontText from "../common/FontText";
 import FormInput from "../common/FormInput";
@@ -12,16 +12,23 @@ type TProps = {
   step: number;
   control: Control<IRegisterInfo, any>;
   setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
+  setValue: UseFormSetValue<IRegisterInfo>;
 };
 
 export interface IAuthState {
+  phoneNumber: string;
   isAvailPhoneNumber: boolean;
   isCodeSent: boolean;
   authCode: string;
   isAuthCodeChecked: number;
 }
 
-const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
+const RegisterStepTwo = ({
+  step,
+  control,
+  setIsDisableNext,
+  setValue,
+}: TProps) => {
   const loader = useRef(new Animated.Value(0)).current;
 
   const load = () => {
@@ -49,6 +56,7 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
   }, [step]);
 
   const [authState, setAuthState] = useState({
+    phoneNumber: "",
     isAvailPhoneNumber: false,
     isCodeSent: false,
     authCode: "",
@@ -60,7 +68,11 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
 
   const handlePhoneNumber = (text: string) => {
     if (text.match(/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}/)) {
-      setAuthState({ ...authState, isAvailPhoneNumber: true });
+      setAuthState({
+        ...authState,
+        phoneNumber: text,
+        isAvailPhoneNumber: true,
+      });
     } else setAuthState({ ...authState, isAvailPhoneNumber: false });
   };
 
@@ -87,6 +99,8 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
     if (authState.authCode === typeAuthCode && timerRunning) {
       setIsDisableNext(false);
       setAuthState({ ...authState, isAuthCodeChecked: 1 });
+
+      setValue("phone", authState.phoneNumber);
     } else if (authState.authCode !== typeAuthCode && timerRunning) {
       setAuthState({ ...authState, isAuthCodeChecked: 2 });
     }
@@ -120,6 +134,7 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
             onChangeText={handlePhoneNumber}
             editable={authState.isAuthCodeChecked !== 1}
+            keyboardType="phone-pad"
           />
           <RegisterInfoCheckButton
             enabled={authState.isAvailPhoneNumber && !authState.isCodeSent}
@@ -147,6 +162,7 @@ const RegisterStepTwo = ({ step, control, setIsDisableNext }: TProps) => {
             inputStyle="h-12 border-b-[2px] border-primary justify-center font-[NotoSans] "
             onChangeText={handleConfirmAuthCode}
             editable={authState.isAuthCodeChecked !== 1}
+            keyboardType="number-pad"
           />
           <RegisterInfoCheckButton
             enabled={

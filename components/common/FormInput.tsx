@@ -1,6 +1,17 @@
-import { ErrorMessage } from "@hookform/error-message";
+import {
+  ErrorMessage,
+  FieldValuesFromFieldErrors,
+} from "@hookform/error-message";
 import React, { useState } from "react";
-import { Control, Controller, useFormState } from "react-hook-form";
+import {
+  Control,
+  Controller,
+  FieldErrors,
+  FieldName,
+  FieldPath,
+  FieldValues,
+  useFormState,
+} from "react-hook-form";
 import {
   Image,
   Keyboard,
@@ -14,9 +25,13 @@ import {
 import FontText from "./FontText";
 
 type TProps<T> = {
-  control: Control<any, any>;
+  control: Control<T extends FieldValues ? T : any>;
   label: string;
-  name: keyof T & string;
+  // name: keyof T & string;
+  name: FieldPath<T extends FieldValues ? T : any>;
+  errorName?: FieldName<
+    FieldValuesFromFieldErrors<FieldErrors<T extends FieldValues ? T : any>>
+  >;
   rules?: { [key: string]: any };
   containerStyle?: string;
   labelStyle?: string;
@@ -26,7 +41,7 @@ type TProps<T> = {
   secureTextEntry?: boolean;
 } & TextInputProps;
 
-const FormInput = <T extends {}>({
+const FormInput = <T extends FieldValues>({
   control,
   label,
   rules,
@@ -37,6 +52,7 @@ const FormInput = <T extends {}>({
   eyeButtonStyle,
   placeholder,
   name,
+  errorName,
   secureTextEntry,
   ...rest
 }: TProps<T>) => {
@@ -89,15 +105,17 @@ const FormInput = <T extends {}>({
               )}
             </TouchableOpacity>
           )}
-          <ErrorMessage
-            errors={errors}
-            name={name}
-            render={({ message }) => (
-              <FontText style={{ color: "red" }} className={errorLabelStyle}>
-                {message}
-              </FontText>
-            )}
-          />
+          {errorName && (
+            <ErrorMessage
+              errors={errors}
+              name={errorName}
+              render={({ message }) => (
+                <FontText style={{ color: "red" }} className={errorLabelStyle}>
+                  {message}
+                </FontText>
+              )}
+            />
+          )}
         </View>
       )}
     />

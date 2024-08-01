@@ -2,16 +2,22 @@ import { View, Text, Animated, KeyboardAvoidingView } from "react-native";
 import React, { useEffect, useRef } from "react";
 import RegisterProgressInfo from "./RegisterProgressInfo";
 import FormInput from "../common/FormInput";
-import { Control } from "react-hook-form";
+import { Control, UseFormSetValue } from "react-hook-form";
 import { IRegisterInfo } from "@/app/(auth)/register";
 
 type TProps = {
   step: number;
   control: Control<IRegisterInfo, any>;
   setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
+  setValue: UseFormSetValue<IRegisterInfo>;
 };
 
-const RegisterStepOne = ({ step, control, setIsDisableNext }: TProps) => {
+const RegisterStepOne = ({
+  step,
+  control,
+  setIsDisableNext,
+  setValue,
+}: TProps) => {
   const loader = useRef(new Animated.Value(0)).current;
 
   const load = () => {
@@ -42,6 +48,8 @@ const RegisterStepOne = ({ step, control, setIsDisableNext }: TProps) => {
     if (text.length > 0) {
       setIsDisableNext(false);
     } else setIsDisableNext(true);
+
+    setValue("name", text);
   };
 
   return (

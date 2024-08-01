@@ -30,6 +30,7 @@ const LoginForm = () => {
           containerStyle="gap-1"
           labelStyle="text-[16px] font-[NotoSans]"
           inputStyle="h-12 rounded border-[1px] border-gray300 px-4 pb-0 pt-0 font-[NotoSans] text-sm"
+          errorName="username"
           errorLabelStyle="absolute -bottom-5 ml-1"
         />
         <FormInput<ILoginInput>
@@ -39,6 +40,7 @@ const LoginForm = () => {
           rules={{ required: "비밀번호를 입력해 주세요." }}
           placeholder="비밀번호를 입력해 주세요"
           name="password"
+          errorName="password"
           containerStyle="gap-1"
           labelStyle="text-[16px] font-[NotoSans]"
           inputStyle="h-12 rounded border-[1px] border-gray300 px-4 pb-0 pt-0 font-[NotoSans] text-sm"

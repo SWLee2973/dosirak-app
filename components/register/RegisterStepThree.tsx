@@ -1,6 +1,6 @@
 import { IRegisterInfo } from "@/app/(auth)/register";
 import React, { useEffect, useRef, useState } from "react";
-import { Control } from "react-hook-form";
+import { Control, UseFormSetValue } from "react-hook-form";
 import { Animated, View } from "react-native";
 import FormInput from "../common/FormInput";
 import RegisterInfoCheckButton from "./RegisterInfoCheckButton";
@@ -12,9 +12,15 @@ type TProps = {
   step: number;
   control: Control<IRegisterInfo, any>;
   setIsDisableNext: React.Dispatch<React.SetStateAction<boolean>>;
+  setValue: UseFormSetValue<IRegisterInfo>;
 };
 
-const RegisterStepThree = ({ step, control, setIsDisableNext }: TProps) => {
+const RegisterStepThree = ({
+  step,
+  control,
+  setIsDisableNext,
+  setValue,
+}: TProps) => {
   const pb = pbStore((state) => state.pb);
   const loader = useRef(new Animated.Value(0)).current;
 
@@ -57,6 +63,9 @@ const RegisterStepThree = ({ step, control, setIsDisableNext }: TProps) => {
     if (key === "username" && isDuplicate !== 0) {
       setIsDuplicate(0);
     }
+
+    if (key === "password") setValue("password", text);
+    if (key === "passwordConfirm") setValue("passwordConfirm", text);
   };
 
   const handleCheckDuplicate = async () => {
@@ -66,8 +75,14 @@ const RegisterStepThree = ({ step, control, setIsDisableNext }: TProps) => {
       filter: `username ?= "${username}"`,
     });
 
-    if (existData?.totalItems === 0) setIsDuplicate(1);
-    if (existData?.totalItems === 1) setIsDuplicate(2);
+    if (existData?.totalItems === 0) {
+      setIsDuplicate(1);
+      setValue("username", username);
+    }
+    if (existData?.totalItems === 1) {
+      setIsDuplicate(2);
+      setValue("username", "");
+    }
   };
 
   useEffect(() => {
