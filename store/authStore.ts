@@ -65,12 +65,6 @@ const authStore = create<IAuthStore>((set) => ({
     pb: Client,
     { name, phone, username, password, passwordConfirm }: IRegisterInfo,
   ) => {
-    console.log("name : ", name);
-    console.log("phone : ", phone);
-    console.log("username : ", username);
-    console.log("password : ", password);
-    console.log("passwordConfirm : ", passwordConfirm);
-
     try {
       const response = await pb.collection("users").create({
         username,

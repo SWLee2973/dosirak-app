@@ -54,8 +54,13 @@ const RegisterStepThree = ({
     passwordConfirm: "",
   });
 
+  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
   // 0: 확인 안됨, 1: 사용 가능, 2: 중복
   const [isDuplicate, setIsDuplicate] = useState(0);
+  // 0: 입력 안함, 1: 체크 완료, 2: 사용 불가
+  const [passwordCheck, setPasswordCheck] = useState(0);
+  // 0: 입력 안함, 1: 같음, 2: 다름
+  const [isPasswordSame, setIsPasswordSame] = useState(0);
 
   const handleLoginInfo = (key: keyof typeof loginInfo) => (text: string) => {
     setLoginInfo({ ...loginInfo, [key]: text });
@@ -64,8 +69,29 @@ const RegisterStepThree = ({
       setIsDuplicate(0);
     }
 
-    if (key === "password") setValue("password", text);
-    if (key === "passwordConfirm") setValue("passwordConfirm", text);
+    if (key === "password") {
+      setValue("password", text);
+
+      if (text.match(passwordRegex)) {
+        setPasswordCheck(1);
+        if (text === loginInfo.passwordConfirm) {
+          setIsPasswordSame(1);
+        }
+      } else if (text.length < 8) {
+        setPasswordCheck(0);
+      } else {
+        setPasswordCheck(2);
+      }
+    }
+    if (key === "passwordConfirm") {
+      setValue("passwordConfirm", text);
+
+      if (text !== loginInfo.password && text.length >= 8) {
+        setIsPasswordSame(2);
+      } else {
+        setIsPasswordSame(1);
+      }
+    }
   };
 
   const handleCheckDuplicate = async () => {
@@ -89,6 +115,7 @@ const RegisterStepThree = ({
     if (
       loginInfo.password !== "" &&
       loginInfo.password === loginInfo.passwordConfirm &&
+      loginInfo.password.match(passwordRegex) &&
       isDuplicate === 1
     ) {
       setIsDisableNext(false);
@@ -150,6 +177,16 @@ const RegisterStepThree = ({
             eyeButtonStyle="absolute right-2 bottom-3"
             onChangeText={handleLoginInfo("password")}
           />
+          {passwordCheck === 1 && (
+            <FontText className="absolute -bottom-6 text-[15px] text-green-700">
+              사용 가능한 비밀번호 입니다.
+            </FontText>
+          )}
+          {passwordCheck === 2 && (
+            <FontText className="absolute -bottom-6 text-[15px] text-red-700">
+              숫자와 영문자만 사용해 8글자 이상으로 입력해 주세요.
+            </FontText>
+          )}
         </View>
         <View className="relative mt-6">
           <FormInput<IRegisterInfo>
@@ -164,6 +201,11 @@ const RegisterStepThree = ({
             eyeButtonStyle="absolute right-2 bottom-3"
             onChangeText={handleLoginInfo("passwordConfirm")}
           />
+          {isPasswordSame === 2 && (
+            <FontText className="absolute -bottom-6 text-[15px] text-red-700">
+              같은 비밀번호를 입력해 주세요.
+            </FontText>
+          )}
         </View>
       </View>
     </Animated.View>
