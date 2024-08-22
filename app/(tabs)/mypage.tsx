@@ -5,14 +5,14 @@ import { useRouter } from "expo-router";
 import authStore from "@/store/authStore";
 import pbStore from "@/store/pbStore";
 
-const settings = () => {
+const MyPage = () => {
   const pb = pbStore((state) => state.pb);
   const router = useRouter();
   const { logOut } = authStore((state) => state);
 
   return (
     <View className="flex-1 items-center justify-center">
-      <Text>settings</Text>
+      <Text>MyPage</Text>
       <TouchableOpacity
         onPress={() => {
           router.replace("/(auth)/login");
@@ -27,6 +27,6 @@ const settings = () => {
   );
 };
 
-export default settings;
+export default MyPage;
 
 const styles = StyleSheet.create({});

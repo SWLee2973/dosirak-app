@@ -1,11 +1,42 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { TabBarIcon } from "@/components/navigation/TabBarIcon";
+import { RouteNames } from "@/types/navigation";
 import { Tabs } from "expo-router";
+import React from "react";
+import { Platform, StyleSheet } from "react-native";
 
 const tabLayout = () => {
-  return <Tabs />;
+  return (
+    <Tabs
+      screenOptions={(options) => ({
+        headerShown: false,
+        tabBarActiveTintColor: "#145044",
+        tabBarIcon: ({ color, focused }) => (
+          <TabBarIcon
+            name={options.route.name as RouteNames}
+            color={color}
+            focused={focused}
+          />
+        ),
+        tabBarShowLabel: false,
+        tabBarStyle: styles.tabBar,
+      })}
+    >
+      <Tabs.Screen name={RouteNames.HOME} />
+      <Tabs.Screen name={RouteNames.GROUP} />
+      <Tabs.Screen name={RouteNames.FEED} />
+      <Tabs.Screen name={RouteNames.MYPAGE} />
+    </Tabs>
+  );
 };
 
 export default tabLayout;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  tabBar: {
+    height: Platform.OS === "android" ? 80 : 100,
+    paddingTop: 10,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 10,
+  },
+});

@@ -21,7 +21,7 @@ const index = () => {
     if (!isLoggedIn && !inAuthGroup) {
       router.replace("/(auth)/login");
     } else if (isLoggedIn) {
-      router.replace("/(tabs)");
+      router.replace("/(tabs)/home");
     }
   }, [segments, navigationState?.key, isInitialized]);
 
