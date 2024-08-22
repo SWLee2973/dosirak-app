@@ -46,6 +46,7 @@ const register = () => {
   const [step, setStep] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
   const [isAgreed, setIsAgreed] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleNext = () => {
     setIsDisabled(true);
@@ -63,7 +64,10 @@ const register = () => {
     const result = await register(pb, data);
 
     if (result) {
-      logIn(pb, data.username, data.password);
+      setLoading(true);
+      await logIn(pb, data.username, data.password);
+
+      setLoading(false);
     }
   });
 
@@ -149,7 +153,7 @@ const register = () => {
           </View>
         </SafeAreaView>
       </TouchableWithoutFeedback>
-      {isSubmitting && <Spinner />}
+      {(isSubmitting || loading) && <Spinner />}
     </>
   );
 };

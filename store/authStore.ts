@@ -72,7 +72,7 @@ const authStore = create<IAuthStore>((set) => ({
         passwordConfirm,
         phone,
         name,
-        nickName: randomNickName(),
+        nickname: randomNickName(),
       });
 
       return { user: response };
