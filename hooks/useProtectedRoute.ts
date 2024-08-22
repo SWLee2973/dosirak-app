@@ -31,7 +31,7 @@ export const useProtectedRoute = (user: AuthModel, isInitialized: boolean) => {
     if (!user && !inAuthGroup) {
       router.replace("/(auth)/login");
     } else if (user && inAuthGroup) {
-      router.replace("/(tabs)/");
+      router.replace("/(tabs)/home");
     }
   }, [user, segments, isNavigationReady, isInitialized]);
 };
