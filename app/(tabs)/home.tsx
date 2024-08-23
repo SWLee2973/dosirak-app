@@ -1,11 +1,23 @@
-import { View, Text } from "react-native";
+import HomeHeader from "@/components/home/HomeHeader";
+import LikeStatus from "@/components/home/LikeStatus";
+import MyCard from "@/components/home/MyCard";
+import Recommend from "@/components/home/Recommend";
 import React from "react";
+import { SafeAreaView, View } from "react-native";
 
 const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <SafeAreaView className="bg-white">
+      <HomeHeader />
+      <View className="h-full bg-white">
+        <Recommend />
+        <LikeStatus />
+        <View className="mt-10 w-full flex-row justify-between px-9">
+          <MyCard name="내 모임" type="group" />
+          <MyCard name="내 피드" type="feed" />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 

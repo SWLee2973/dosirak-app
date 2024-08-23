@@ -20,6 +20,7 @@ const tabLayout = () => {
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBar,
       })}
+      initialRouteName={RouteNames.HOME}
     >
       <Tabs.Screen name={RouteNames.HOME} />
       <Tabs.Screen name={RouteNames.GROUP} />

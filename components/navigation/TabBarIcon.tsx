@@ -27,9 +27,6 @@ const MENU = {
 };
 
 export function TabBarIcon({ name, color, focused, ...rest }: TProps) {
-  console.log("color : ", color);
-  console.log("rest : ", rest);
-
   return (
     <View className="items-center justify-center">
       <IconImage name={name} focused={focused} />
