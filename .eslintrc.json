@@ -4,7 +4,7 @@
   "plugin:tailwindcss/recommended"],
   "env": {
     "node": true,
-    "es2021": true,
+    "es2021": true
   },
   "rules": {
     "tailwindcss/classnames-order": "on"
@@ -16,5 +16,5 @@
   "plugins": [
     "react",
     "tailwindcss"
-  ],
+  ]
 }

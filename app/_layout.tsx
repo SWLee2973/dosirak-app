@@ -28,7 +28,7 @@ export default function RootLayout() {
     NotoSansExtraBold: require("../assets/fonts/NotoSansKR-ExtraBold.ttf"),
   });
 
-  const [appLoaded, setAppLoaded] = useState(true);
+  const [appLoaded, setAppLoaded] = useState(false);
 
   if (Platform.OS === "android") {
     StatusBar.setBackgroundColor("white");

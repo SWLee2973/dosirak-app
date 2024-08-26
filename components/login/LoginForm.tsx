@@ -9,7 +9,6 @@ import {
 import FontText from "../common/FontText";
 import FormInput from "../common/FormInput";
 import pbStore from "@/store/pbStore";
-import Spinner from "../common/Spinner";
 import authStore from "@/store/authStore";
 
 export interface ILoginInput {
@@ -70,6 +69,7 @@ const LoginForm = () => {
             errorLabelStyle="absolute -bottom-5 ml-1"
             eyeButtonStyle="absolute right-2 bottom-3"
             onChange={() => setError(false)}
+            onSubmitEditing={handleLogin}
           />
         </View>
         <TouchableOpacity
