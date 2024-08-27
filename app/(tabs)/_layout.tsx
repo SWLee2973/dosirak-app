@@ -19,6 +19,7 @@ const tabLayout = () => {
         ),
         tabBarShowLabel: false,
         tabBarStyle: styles.tabBar,
+        unmountOnBlur: true,
       })}
       initialRouteName={RouteNames.HOME}
     >
@@ -34,7 +35,7 @@ export default tabLayout;
 
 const styles = StyleSheet.create({
   tabBar: {
-    height: Platform.OS === "android" ? 80 : 100,
+    height: Platform.OS === "ios" ? 100 : 80,
     paddingTop: 10,
     justifyContent: "space-between",
     alignItems: "center",

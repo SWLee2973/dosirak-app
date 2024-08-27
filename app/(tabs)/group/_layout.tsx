@@ -1,7 +1,8 @@
-import { View, Text, SafeAreaView } from "react-native";
-import React, { useState } from "react";
-import { Navigator, Slot, Stack } from "expo-router";
-import GroupHeader, { TTabProps } from "@/components/group/GroupHeader";
+import GroupHeader from "@/components/group/GroupHeader";
+import clsx from "clsx";
+import { Navigator, Slot } from "expo-router";
+import React from "react";
+import { Platform, SafeAreaView } from "react-native";
 
 export const unstable_settings = {
   initialRouteName: "popular",
@@ -9,17 +10,11 @@ export const unstable_settings = {
 
 const GroupLayout = () => {
   return (
-    // <Stack
-    //   screenOptions={{
-    //     headerShown: false,
-    //   }}
-    //   initialRouteName="popular"
-    // >
-    //   <Stack.Screen name="popular" />
-    //   <Stack.Screen name="newgroup" />
-    //   <Stack.Screen name="mygroup" />
-    // </Stack>
-    <SafeAreaView className="bg-white">
+    <SafeAreaView
+      className={clsx("bg-white", {
+        "pt-10": Platform.OS === "android",
+      })}
+    >
       <Navigator>
         <GroupHeader />
         <Slot />

@@ -1,10 +1,10 @@
-import { View, Text, TouchableOpacity, ViewStyle } from "react-native";
-import React from "react";
-import { Shadow } from "react-native-shadow-2";
-import FontText from "../common/FontText";
 import AddButton from "@/assets/images/plus.svg";
 import SearchButton from "@/assets/images/search.svg";
-import { Link, Navigator, useNavigation } from "expo-router";
+import { Link, Navigator } from "expo-router";
+import React from "react";
+import { TouchableOpacity, View } from "react-native";
+import { Shadow } from "react-native-shadow-2";
+import FontText from "../common/FontText";
 
 export type TTabProps = {
   tab: "popular" | "new" | "my";
@@ -18,9 +18,9 @@ const GroupHeader = () => {
       offset={[0, 3]}
       distance={3}
       // sides={}
-      style={{ width: "100%" }}
+      style={{ width: "100%", zIndex: 10 }}
     >
-      <View className="h-24 justify-between bg-white">
+      <View className="z-10 h-24 justify-between bg-white">
         <View className="flex-row items-center justify-between px-9 pt-2">
           <FontText font="GongGothic" className="text-[26px]">
             모임
@@ -80,7 +80,7 @@ const TabLink = ({
         {currentTab?.name === name && (
           <>
             <View className="absolute -right-1 -z-10 h-[9px] w-[9px] rounded-full bg-secondary" />
-            <View className="absolute -bottom-3 h-1 w-full rounded-lg bg-primary" />
+            <View className="absolute -bottom-3.5 h-1 w-full rounded-lg bg-primary" />
           </>
         )}
       </View>

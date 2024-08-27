@@ -3,11 +3,14 @@ import LikeStatus from "@/components/home/LikeStatus";
 import MyCard from "@/components/home/MyCard";
 import Recommend from "@/components/home/Recommend";
 import React from "react";
-import { SafeAreaView, View } from "react-native";
+import { Platform, SafeAreaView, View } from "react-native";
 
 const Home = () => {
   return (
-    <SafeAreaView className="bg-white">
+    <SafeAreaView
+      className="bg-white"
+      style={{ paddingTop: Platform.OS === "ios" ? 0 : 40 }}
+    >
       <HomeHeader />
       <View className="h-full bg-white">
         <Recommend />
