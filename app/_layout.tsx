@@ -9,6 +9,7 @@ import authStore, { IAuthStore } from "@/store/authStore";
 import { Platform, StatusBar } from "react-native";
 import pbStore from "@/store/pbStore";
 import { AuthProvider } from "@/context/auth";
+import { QueryProvider } from "@/context/query";
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -56,9 +57,11 @@ function RootLayoutNav() {
 
   return (
     <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(tabs)" />
-      </Stack>
+      <QueryProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+        </Stack>
+      </QueryProvider>
     </AuthProvider>
   );
 }

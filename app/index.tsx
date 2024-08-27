@@ -1,7 +1,11 @@
 import authStore from "@/store/authStore";
+import { dayjsExtend } from "@/utils";
+import dayjs from "dayjs";
 import { useRootNavigationState, useRouter, useSegments } from "expo-router";
 import { useEffect } from "react";
 import { ActivityIndicator, View } from "react-native";
+
+dayjsExtend();
 
 const index = () => {
   const { isInitialized, isLoggedIn } = authStore((state) => ({
