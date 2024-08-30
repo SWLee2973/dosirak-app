@@ -1,3 +1,5 @@
+import { RecordModel } from "pocketbase";
+
 export type TGroup = {
   collectionId: string;
   id: string;
@@ -11,4 +13,10 @@ export type TGroup = {
   thumbnail: string;
   title: string;
   last_upload_time: Date;
+};
+
+export type TRecommendGroup = {
+  items: TGroup[];
+  page: number;
+  totalPages: number;
 };

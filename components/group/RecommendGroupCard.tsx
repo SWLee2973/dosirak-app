@@ -7,41 +7,58 @@ import FontText from "../common/FontText";
 import ParticipantIcon from "@/assets/images/people.svg";
 import LikeCountIcon from "@/assets/images/likecount.svg";
 import GroupUploadTime from "./atom/GroupUploadTime";
+import { TGroup } from "@/types/group";
+import { getPbImage } from "@/utils";
 
-const RecommendGroupCard = () => {
+type TProps = {
+  item: TGroup;
+};
+
+const RecommendGroupCard = ({ item }: TProps) => {
+  const uri = getPbImage(item);
+  const imageSource = uri
+    ? { uri }
+    : require("@/assets/images/groupExample.png");
+
   return (
     <Shadow style={{ borderRadius: 16, width: "100%" }} distance={6}>
       <TouchableOpacity className="h-32 w-full flex-row overflow-hidden">
-        <Image
-          source={require("@/assets/images/groupExample.png")}
-          className="h-32 w-32 rounded-[16px]"
-          resizeMode="cover"
-        />
+        <Image source={imageSource} className="h-32 w-32 rounded-[16px]" />
         <View className="flex-1 py-3.5 pl-4 pr-6">
           <View className="flex-row items-center justify-between">
             <GroupStatus isRecruiting />
             <GroupLikeButton />
           </View>
           <FontText font="GongGothicLight" className="mt-2 text-[16px]">
-            매일매일 도시락
+            {item.title}
           </FontText>
           <View className="mt-3 flex-row items-center">
-            <FontText font="NotoSansBold" className="text-[12px] text-gray700">
-              # 밀프렙
-            </FontText>
+            {item.hashTag.hashTag.map((tag, index) => (
+              <FontText
+                key={index}
+                font="NotoSansBold"
+                className="text-[12px] text-gray700"
+              >
+                # {tag}
+              </FontText>
+            ))}
           </View>
           <View className="flex-row items-center justify-between">
             <View className="flex-row gap-x-4">
               <View className="flex-row items-center space-x-1">
                 <ParticipantIcon style={{ marginTop: 2 }} />
-                <FontText className="text-[12px] text-gray700">180</FontText>
+                <FontText className="text-[12px] text-gray700">
+                  {item.i_participate_it}
+                </FontText>
               </View>
               <View className="flex-row items-center space-x-1">
                 <LikeCountIcon style={{ marginTop: 2 }} />
-                <FontText className="text-[12px] text-gray700">180</FontText>
+                <FontText className="text-[12px] text-gray700">
+                  {item.i_like_it}
+                </FontText>
               </View>
             </View>
-            <GroupUploadTime uploadTime={new Date()} />
+            <GroupUploadTime uploadTime={item.last_upload_time ?? undefined} />
           </View>
         </View>
       </TouchableOpacity>

@@ -17,6 +17,7 @@ export default function getPbImage({
   id,
   thumbnail,
 }: TSingleImageProps) {
+  if (!thumbnail) return null;
   return `${PB_URL}/api/files/${collectionId}/${id}/${thumbnail}`;
 }
 

@@ -18,6 +18,9 @@ type TProps = {
 
 const PopularGroupCard = ({ item }: TProps) => {
   const uri = getPbImage(item);
+  const imageSource = uri
+    ? { uri }
+    : require("@/assets/images/groupExample.png");
 
   return (
     <Shadow style={{ borderRadius: 16 }} distance={6}>
@@ -26,7 +29,7 @@ const PopularGroupCard = ({ item }: TProps) => {
           <Image
             className="absolute -z-10"
             style={{ width: "100%", height: "100%" }}
-            source={{ uri }}
+            source={imageSource}
           />
           <View className="flex-row items-center justify-between p-5">
             <GroupStatus isRecruiting={item.isRecruiting} />

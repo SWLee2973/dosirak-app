@@ -1,13 +1,14 @@
 import FontText from "@/components/common/FontText";
 import PopularGroupCardSwiper from "@/components/group/PopularGroupCardSwiper";
 import RecommendGroupList from "@/components/group/RecommendGroupList";
-import { usePopularGroup } from "@/hooks/useGroup";
+import { useGroup } from "@/hooks";
 import { TGroup } from "@/types/group";
 import React from "react";
 import { ActivityIndicator, FlatList, View } from "react-native";
 
 const popular = () => {
-  const { data, isLoading } = usePopularGroup();
+  const { popularGroups } = useGroup();
+  const { data, isLoading } = popularGroups();
 
   return isLoading ? (
     <ActivityIndicator />
