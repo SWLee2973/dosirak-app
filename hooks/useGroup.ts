@@ -1,14 +1,8 @@
 import pbStore from "@/store/pbStore";
-import { TGroup, TRecommendGroup } from "@/types/group";
-import {
-  QueryClientContext,
-  useInfiniteQuery,
-  useQuery,
-} from "@tanstack/react-query";
-import { RecordModel } from "pocketbase";
-import { useContext, useState } from "react";
-import { useInfiniteScroll } from "./useInfiniteScroll";
+import { TGroup } from "@/types/group";
+import { useQuery } from "@tanstack/react-query";
 import dayjs from "dayjs";
+import { useInfiniteScroll } from "./useInfiniteScroll";
 
 const useGroup = () => {
   const pb = pbStore((state) => state.pb);
@@ -66,10 +60,22 @@ const useGroup = () => {
     });
   };
 
+  const myGroups = (userId: string) => {
+    return useInfiniteScroll<TGroup>({
+      key: "myGroup",
+      collection: "groups_popular",
+      limit: 8,
+      filters: {
+        filter: `participant.id ?~ "${userId}"`,
+      },
+    });
+  };
+
   return {
     popularGroups,
     recommendGroups,
     newGroups,
+    myGroups,
   };
 };
 

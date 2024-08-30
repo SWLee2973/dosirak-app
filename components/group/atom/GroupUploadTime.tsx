@@ -16,7 +16,7 @@ const GroupUploadTime = ({ uploadTime }: TProps) => {
     <View className="flex-row items-center space-x-1">
       <ClockIcon style={{ marginTop: 2 }} />
       <FontText className="text-[12px] text-gray700">
-        {uploadTime ? timeLabel : "작성된 피드 없음"}
+        {uploadTime ? timeLabel : "피드 없음"}
       </FontText>
     </View>
   );
