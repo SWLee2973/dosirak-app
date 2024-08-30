@@ -1,21 +1,22 @@
 import pbStore from "@/store/pbStore";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import _ from "lodash";
+import { RecordListOptions } from "pocketbase";
 import { useCallback, useMemo, useState } from "react";
 
-type Params<F> = {
+type Params = {
   key: string;
   collection: string;
   limit?: number;
-  filters?: F;
+  filters?: RecordListOptions;
 };
 
-export const useInfiniteScroll = <T = unknown, F = object>({
+export const useInfiniteScroll = <T = unknown>({
   key,
   collection,
   limit = 10,
   filters,
-}: Params<F>) => {
+}: Params) => {
   const pb = pbStore((state) => state.pb);
   const queryKey = [
     key,
@@ -26,7 +27,9 @@ export const useInfiniteScroll = <T = unknown, F = object>({
 
   const [isRefreshing, setIsRefreshing] = useState(false);
   const queryFn = async ({ pageParam = 1 }) => {
-    const response = await pb?.collection(collection).getList(pageParam, limit);
+    const response = await pb
+      ?.collection(collection)
+      .getList(pageParam, limit, filters);
 
     if (response) {
       return {

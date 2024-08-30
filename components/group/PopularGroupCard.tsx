@@ -1,6 +1,7 @@
-import ClockIcon from "@/assets/images/clock.svg";
 import LikeCountIcon from "@/assets/images/likecount.svg";
 import ParticipantIcon from "@/assets/images/people.svg";
+import { TGroup } from "@/types/group";
+import { getPbImage } from "@/utils";
 import React from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 import { Shadow } from "react-native-shadow-2";
@@ -8,9 +9,6 @@ import FontText from "../common/FontText";
 import GroupLikeButton from "./atom/GroupLikeButton";
 import GroupStatus from "./atom/GroupStatus";
 import GroupUploadTime from "./atom/GroupUploadTime";
-import dayjs from "dayjs";
-import { TGroup } from "@/types/group";
-import { getPbImage } from "@/utils";
 
 type TProps = {
   item: TGroup;
@@ -23,7 +21,7 @@ const PopularGroupCard = ({ item }: TProps) => {
     : require("@/assets/images/groupExample.png");
 
   return (
-    <Shadow style={{ borderRadius: 16 }} distance={6}>
+    <Shadow style={{ borderRadius: 16 }} safeRender distance={6}>
       <TouchableOpacity className="h-64 w-64 overflow-hidden rounded-[16px] bg-white">
         <View className="h-44 w-full justify-between overflow-hidden">
           <Image

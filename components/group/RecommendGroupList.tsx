@@ -1,9 +1,9 @@
 import { useGroup } from "@/hooks";
 import React from "react";
 import { FlatList, RefreshControl, View } from "react-native";
-import RecommendGroupCard from "./RecommendGroupCard";
 import LottieView from "lottie-react-native";
 import clsx from "clsx";
+import SmallGroupCard from "./SmallGroupCard";
 
 const RecommendGroupList = () => {
   const { recommendGroups } = useGroup();
@@ -37,7 +37,7 @@ const RecommendGroupList = () => {
         <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
       }
       style={{ rowGap: 20 }}
-      renderItem={({ item }) => <RecommendGroupCard item={item} />}
+      renderItem={({ item }) => <SmallGroupCard item={item} />}
       ListFooterComponent={
         <View
           className={clsx(

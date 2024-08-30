@@ -14,7 +14,7 @@ type TProps = {
   item: TGroup;
 };
 
-const RecommendGroupCard = ({ item }: TProps) => {
+const SmallGroupCard = ({ item }: TProps) => {
   const uri = getPbImage(item);
   const imageSource = uri
     ? { uri }
@@ -66,4 +66,4 @@ const RecommendGroupCard = ({ item }: TProps) => {
   );
 };
 
-export default RecommendGroupCard;
+export default SmallGroupCard;

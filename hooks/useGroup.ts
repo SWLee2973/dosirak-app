@@ -8,6 +8,7 @@ import {
 import { RecordModel } from "pocketbase";
 import { useContext, useState } from "react";
 import { useInfiniteScroll } from "./useInfiniteScroll";
+import dayjs from "dayjs";
 
 const useGroup = () => {
   const pb = pbStore((state) => state.pb);
@@ -54,9 +55,21 @@ const useGroup = () => {
     });
   };
 
+  const newGroups = () => {
+    return useInfiniteScroll<TGroup>({
+      key: "newGroup",
+      collection: "groups_popular",
+      limit: 5,
+      filters: {
+        filter: `created > "${dayjs().subtract(1, "year").format("YYYY-MM-DD")}"`,
+      },
+    });
+  };
+
   return {
     popularGroups,
     recommendGroups,
+    newGroups,
   };
 };
 
