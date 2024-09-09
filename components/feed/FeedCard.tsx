@@ -4,6 +4,8 @@ import React from "react";
 import { View } from "react-native";
 import FeedCardHeader from "./atom/FeedCardHeader";
 import FeedImageSwiper from "./FeedImageSwiper";
+import FeedInteraction from "./FeedInteraction";
+import FeedMainContent from "./FeedMainContent";
 
 type TProps = {
   item: TFeed;
@@ -16,6 +18,8 @@ const FeedCard = ({ item }: TProps) => {
     <View className="mb-5">
       <FeedCardHeader writer={item.expand.writer} createDate={createDate} />
       <FeedImageSwiper data={item} />
+      <FeedInteraction data={item} />
+      <FeedMainContent data={item} />
     </View>
   );
 };
