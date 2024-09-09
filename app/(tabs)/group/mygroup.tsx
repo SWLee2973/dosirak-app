@@ -1,19 +1,12 @@
-import {
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  RefreshControl,
-} from "react-native";
-import React from "react";
-import GroupHeader from "@/components/group/GroupHeader";
-import authStore from "@/store/authStore";
-import { useGroup } from "@/hooks";
-import LottieView from "lottie-react-native";
 import FontText from "@/components/common/FontText";
-import clsx from "clsx";
 import MyGroupCard from "@/components/group/MyGroupCard";
+import { useGroup } from "@/hooks";
+import authStore from "@/store/authStore";
 import { TGroup } from "@/types/group";
+import clsx from "clsx";
+import LottieView from "lottie-react-native";
+import React from "react";
+import { FlatList, RefreshControl, View } from "react-native";
 
 const mygroup = () => {
   const user = authStore((state) => state.user);
