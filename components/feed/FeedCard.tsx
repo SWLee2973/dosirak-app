@@ -1,11 +1,9 @@
-import Guest from "@/assets/images/guest.svg";
 import { TFeed } from "@/types/feed";
-import { displayDate, getPbImage } from "@/utils";
+import { displayDate } from "@/utils";
 import React from "react";
-import { Image, TouchableOpacity, View } from "react-native";
-import FontText from "../common/FontText";
-import Add from "@/assets/images/add.svg";
+import { View } from "react-native";
 import FeedCardHeader from "./atom/FeedCardHeader";
+import FeedImageSwiper from "./FeedImageSwiper";
 
 type TProps = {
   item: TFeed;
@@ -17,6 +15,7 @@ const FeedCard = ({ item }: TProps) => {
   return (
     <View className="mb-5">
       <FeedCardHeader writer={item.expand.writer} createDate={createDate} />
+      <FeedImageSwiper data={item} />
     </View>
   );
 };

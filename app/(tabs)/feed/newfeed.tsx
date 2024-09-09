@@ -30,7 +30,7 @@ const newfeed = () => {
       />
     </View>
   ) : (
-    <View className="min-h-full p-9">
+    <View className="min-h-full">
       <FlatList<TFeed>
         keyExtractor={(item) => item.id}
         initialNumToRender={5}
@@ -40,7 +40,11 @@ const newfeed = () => {
         refreshControl={
           <RefreshControl refreshing={isRefreshing} onRefresh={onRefresh} />
         }
-        contentContainerStyle={{ rowGap: 20, paddingBottom: 170 }}
+        contentContainerStyle={{
+          rowGap: 20,
+          padding: 36,
+          paddingBottom: 170,
+        }}
         renderItem={({ item }) => <FeedCard item={item} />}
         showsVerticalScrollIndicator={false}
         ListFooterComponent={
